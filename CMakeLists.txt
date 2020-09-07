@@ -1,4 +1,10 @@
-project(ttt CXX)
+cmake_policy(SET CMP0048 NEW)
+
+project(ttt
+	VERSION 1.0.0
+	DESCRIPTION "Simple CMake example"
+	HOMEPAGE_URL "https://github.com/ntimeu/ttt"
+	LANGUAGES CXX)
 cmake_minimum_required(VERSION 3.17)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -7,7 +13,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 option(ENABLE_TESTS "Compile tests for all subprojects" OFF)
 if(ENABLE_TESTS)
-	add_subdirectory(catch2)
+	add_subdirectory(vendor/Catch2)
 	enable_testing()
 endif()
 
