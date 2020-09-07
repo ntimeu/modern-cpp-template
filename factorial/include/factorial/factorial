@@ -1,0 +1,6 @@
+#pragma once
+
+namespace factorial
+{
+auto factorial(unsigned int value) -> unsigned long long int;
+}
