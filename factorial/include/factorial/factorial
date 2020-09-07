@@ -3,4 +3,9 @@
 namespace factorial
 {
 auto factorial(unsigned int value) -> unsigned long long int;
+
+constexpr auto cfactorial(unsigned int value) -> unsigned long long int
+{
+	return (value < 1) ? 1 : value * cfactorial(value - 1);
+}
 }
