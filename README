@@ -84,3 +84,10 @@ The ENABLE\_TESTS variable controls :
 * call to enable\_testing().
 
 Tests are then added in each project, and added as need arise.
+
+
+Lints
+-----
+
+CMAKE\_CXX\_CLANG\_TIDY is used to specify checks that will run on all your
+sub-projects, adding even more checks than g++/clang++.

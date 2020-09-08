@@ -2,7 +2,7 @@
 
 #include <factorial/factorial>
 
-int main()
+auto main() -> int
 {
 	using factorial::factorial;
 	std::cout << "factorial(3) = " << factorial(3) << '\n';
