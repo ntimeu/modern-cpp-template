@@ -1,0 +1,86 @@
+TTT - example CMake project
+===========================
+
+The aim of this project is to provide a simple, no-brainer cmake project with
+support for catch2 testing library.
+
+
+How projects (executables/libraries) are organized
+--------------------------------------------------
+
+ttt
+\
+ | CMakeLists.txt
+ | src
+ | include
+ | tests
+ | *sub-libraries*
+
+*src* is the directory containing source code (cpp/header files); however
+headers contained in this directory should never be exported to any other CMake
+target.
+
+*include* is the directory containing header files which are exported to other
+projects and only that. This directory can be absent if this project is an
+excutable-only one.
+
+*tests* contains tests (unit/functional) for the current project.
+
+*sub-libraries* are multiples directories containing other CMake projects.
+
+
+CMakeLists.txt
+--------------
+
+This file contains the build system definitions, configurations, etc.
+
+Multiple sections are present into this file :
+
+* c++ standard used is explicitely forced by variables CMAKE\_CXX\_STANDARD,
+  CMAKE\_CXX\_STANDARD\_REQUIRED and CMAKE\_CXX\_EXTENSIONS. Those are adding
+  GLOBALY the flag -std=c++17 to this project and all sub-projects. The
+  EXTENSIONS variable controls wether we want gnu++ extensions to be enabled
+  (hint: don't use them unless you explicitely want one; they are not
+  cross-compiler compatible).
+* options allow variables to be set, and they control the build, allowing users
+  to select various things (release, optimizations, tests, etc).
+* add\_compile\_options is used to add compiler flags to all projects and
+  sub-projects. This allows a more coherent code base.
+* the end of the file should include all sub-directories necessary to compile
+  your main project.
+
+
+Compiler Flags
+--------------
+
+- Wall : enable all common warnings (not "all" as the name suggests), to
+  prevent you from doing stupid things and catching errors early on
+- Wextra : enable even more warnings (see gcc/clang man page for details on
+  which flags are enabled.
+- Werror : any warning will tranform in an error, preventing the build. This
+  prevents dirty/bad code from being included in the code base.
+- Wold-style-cast : the name is explicit ^^ it prevents (void)variable; to
+  force you to use modern/safer c++ casts.
+- fvisibility=hidden : specific optimization for ELF binary file. See
+  [https://gcc.gnu.org/wiki/Visibility](GCC website).
+- pipe : transmit compiled artifacts throught UNIX pipes, improving compile
+  times.
+- O0, O3, Og : optimization level.
+- flto : enable link-time optimization. Can reduce binary size, loading times,
+  etc.
+
+
+Testing
+-------
+
+Tests are supported using the Catch2 header-only library, and launched using
+CTest.
+
+The ENABLE\_TESTS variable controls :
+
+* adding the Catch2 library. This can be replaced by any other library (i.e
+  gtests or others), however you are responsible for modifying tests
+  declaration/implementation to match your test engine.
+* call to enable\_testing().
+
+Tests are then added in each project, and added as need arise.
