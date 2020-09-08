@@ -14,7 +14,8 @@ set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-checks=modernize-*,readability-*")
 
 option(ENABLE_TESTS "Compile tests for all subprojects" OFF)
 if(ENABLE_TESTS)
-	add_subdirectory(vendor/Catch2)
+	find_package(PkgConfig)
+	pkg_search_module(GTEST REQUIRED gtest_main)
 	enable_testing()
 endif()
 

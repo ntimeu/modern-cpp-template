@@ -1,22 +1,24 @@
-#define CATCH_CONFIG_MAIN
-#include <catch2/catch.hpp>
+#include <gtest/gtest.h>
 
 #include <factorial/factorial>
 
-TEST_CASE ("Factorials are computed", "[factorial]") {
+namespace
+{
+TEST(FactorialTest, Factorial) {
 	using factorial::factorial;
 
-	REQUIRE( factorial(1) == 1 );
-	REQUIRE( factorial(2) == 2 );
-	REQUIRE( factorial(3) == 6 );
-	REQUIRE( factorial(10) == 3628800 );
+	EXPECT_EQ( 1, factorial(1) );
+	EXPECT_EQ( 2, factorial(2) );
+	EXPECT_EQ( 6, factorial(3) );
+	EXPECT_EQ( 3628800, factorial(10) );
 }
 
-TEST_CASE ("Constexpr factorials are computed", "[factorial]") {
+TEST(FactorialTest, ConstexprFactorial) {
 	using factorial::cfactorial;
 
-	REQUIRE( cfactorial(1) == 1 );
-	REQUIRE( cfactorial(2) == 2 );
-	REQUIRE( cfactorial(3) == 6 );
-	REQUIRE( cfactorial(10) == 3628800 );
+	EXPECT_EQ( 1, cfactorial(1) );
+	EXPECT_EQ( 2, cfactorial(2) );
+	EXPECT_EQ( 6, cfactorial(3) );
+	EXPECT_EQ( 3628800, cfactorial(10) );
+}
 }
