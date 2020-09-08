@@ -68,6 +68,7 @@ Compiler Flags
 - O0, O3, Og : optimization level.
 - flto : enable link-time optimization. Can reduce binary size, loading times,
   etc.
+- s : strip output executables, to reduce size and remove anything unnecessary.
 
 
 Testing
